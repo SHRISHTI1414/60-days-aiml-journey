@@ -30,4 +30,4 @@ This repo is my attempt to:
 - Build in public
 
 ## 🔗 Connect with me
-LinkedIn: (add your link)
+LinkedIn: https://www.linkedin.com/in/yadav-shrishti/
