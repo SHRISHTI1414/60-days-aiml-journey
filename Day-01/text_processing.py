@@ -1,45 +1,40 @@
 import string
 from collections import Counter
 
-# Basic stopwords list (you can expand this)
-STOPWORDS = {
+# basic stopwords
+stopwords = {
     "the", "is", "in", "and", "to", "of", "a", "for", "on", "with",
     "as", "by", "an", "be", "this", "that", "it"
 }
 
+# function to split text into words
 def tokenize(text):
-    """
-    Convert text into lowercase words and remove punctuation
-    """
     text = text.lower()
     text = text.translate(str.maketrans('', '', string.punctuation))
-    tokens = text.split()
-    return tokens
+    words = text.split()
+    return words
 
-def remove_stopwords(tokens):
-    """
-    Remove common stopwords from token list
-    """
-    return [word for word in tokens if word not in STOPWORDS]
+# remove common words
+def remove_stopwords(words):
+    filtered = []
+    for word in words:
+        if word not in stopwords:
+            filtered.append(word)
+    return filtered
 
-def word_frequency(tokens):
-    """
-    Count frequency of each word
-    """
-    return Counter(tokens)
+# count frequency
+def word_frequency(words):
+    freq = Counter(words)
+    return freq
 
 
-# Example usage
-if __name__ == "__main__":
-    paragraph = """
-    AI is transforming the world and the way we solve problems.
-    Learning Python for AI is important and useful.
-    """
+# testing
+text = "AI is transforming the world and the way we solve problems. Learning python is useful."
 
-    tokens = tokenize(paragraph)
-    filtered_tokens = remove_stopwords(tokens)
-    freq = word_frequency(filtered_tokens)
+tokens = tokenize(text)
+clean_words = remove_stopwords(tokens)
+freq = word_frequency(clean_words)
 
-    print("Tokens:", tokens)
-    print("\nAfter Stopword Removal:", filtered_tokens)
-    print("\nWord Frequency:", freq)
+print("Tokens:", tokens)
+print("\nAfter removing stopwords:", clean_words)
+print("\nWord frequency:", freq)
