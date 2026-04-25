@@ -1,29 +1,24 @@
 import numpy as np
-from scipy.optimize import minimize
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
  
-doc1 = "AI is transforming the world with intelligent systems"
-doc2 = "Artificial intelligence is changing the world"
+vec1 = np.array([3.0, 4.0, 0.0])
+vec2 = np.array([1.0, 2.0, 2.0])
  
-vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform([doc1, doc2]).toarray()
+def cosine_similarity(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-10)
 
-A = X[0]  
-B = X[1]   
-
+raw_similarity = cosine_similarity(vec1, vec2)
  
-def cost(x):
-    similarity = np.dot(A, x) / (np.linalg.norm(A) * np.linalg.norm(x) + 1e-10)
-    return 1 - similarity  # minimize
+def normalize(v):
+    return v / (np.linalg.norm(v) + 1e-10)
 
+vec1_norm = normalize(vec1)
+vec2_norm = normalize(vec2)
  
-x0 = B.copy()  
-
-result = minimize(cost, x0, method='L-BFGS-B')
-
-optimized_x = result.x
-final_similarity = 1 - result.fun
+normalized_similarity = np.dot(vec1_norm, vec2_norm)
  
-print("Initial Similarity:", cosine_similarity([A], [B])[0][0])
-print("Optimized Similarity:", final_similarity)
+print("Raw Similarity:", raw_similarity)
+print("Normalized Similarity:", normalized_similarity)
+
+print("\nNormalized Vectors:")
+print("vec1_norm:", vec1_norm)
+print("vec2_norm:", vec2_norm)
