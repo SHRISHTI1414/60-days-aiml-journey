@@ -1,0 +1,11 @@
+Retrieval-Augmented Generation (RAG) is a technique that combines retrieval systems with Large Language Models.
+
+RAG systems retrieve relevant context from external knowledge sources before generating responses.
+
+Embeddings are numerical vector representations of text that capture semantic meaning.
+
+Vector databases like FAISS are used for efficient similarity search across embeddings.
+
+Chunking helps divide large documents into smaller contextual segments for retrieval.
+
+Retrieval quality directly impacts the accuracy and grounding of generated responses.
